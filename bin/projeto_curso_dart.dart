@@ -1,6 +1,7 @@
 void main() {
-  Fruta banana = Fruta("Banana", 80.0, "Amarela", "Doce", 20);
-  banana.printAlimento();
+  Fruta limao = Citrica("Limão", 60.0, "Amarela", "Doce", 20, 100);
+  limao.separar();
+  limao.bater();
 }
 
 class Alimento {
@@ -16,7 +17,7 @@ class Alimento {
   }
 }
 
-class Fruta extends Alimento {
+class Fruta extends Alimento implements vitamina {
   int diasDesdeColheita;
   bool? isMadura;
 
@@ -30,5 +31,32 @@ class Fruta extends Alimento {
     } else {
       print("Não está madura!");
     }
+  }
+
+  @override
+  void bater() {
+    print('Batendo o(a) $nome');
+  }
+
+  @override
+  void separar() {
+    print('Separando o(a) $nome');
+  }
+}
+
+abstract class vitamina {
+  void separar();
+  void bater();
+}
+
+class Citrica extends Fruta {
+  int acidez;
+
+  Citrica(super.nome, super.peso, super.cor, super.sabor, super.diasDesdeColheita, this.acidez);
+
+  @override
+  void bater() {
+    print('Adoçando');
+    super.bater();
   }
 }
